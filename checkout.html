@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Checkout - R&D Commerce</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<header>
+
+<div class="logo">
+R&D <span>COMMERCE</span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="cart.html">Cart</a>
+</nav>
+
+</header>
+
+
+<section class="products">
+
+<h1>Checkout</h1>
+
+
+<div class="card">
+
+
+<input placeholder="Full Name">
+
+<br><br>
+
+<input placeholder="Email">
+
+<br><br>
+
+<input placeholder="Phone Number">
+
+<br><br>
+
+<textarea placeholder="Shipping Address"></textarea>
+
+
+<h3>Payment Method</h3>
+
+
+<label>
+<input type="radio" name="payment">
+UPI
+</label>
+
+<br>
+
+<label>
+<input type="radio" name="payment">
+Card
+</label>
+
+<br>
+
+<label>
+<input type="radio" name="payment">
+Cash On Delivery
+</label>
+
+
+<br><br>
+
+<h3>Your Order</h3>
+
+<div id="checkout-items"></div>
+
+<h2>
+
+Total : ₹<span id="checkout-total">0</span>
+
+</h2>
+
+<br>
+
+<button onclick="placeOrder()">
+Place Order
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+<script>
+
+function placeOrder(){
+
+window.location.href="order-success.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

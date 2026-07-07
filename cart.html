@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Cart - R&D Commerce</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+R&D <span>COMMERCE</span>
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="shop.html">Shop</a>
+
+</nav>
+
+
+</header>
+
+
+
+<section class="cart-section">
+
+
+<h1>Your Shopping Cart</h1>
+
+
+<div id="cart-items"></div>
+
+
+
+<div class="cart-summary">
+
+<h2>
+Total: ₹<span id="total">0</span>
+</h2>
+
+<div class="discount-box">
+
+<input 
+type="text" 
+id="coupon"
+placeholder="Enter coupon code"
+>
+
+<button onclick="applyCoupon()">
+Apply
+</button>
+
+</div>
+
+
+<p>
+Discount: ₹<span id="discount">0</span>
+</p>
+
+
+<h2>
+Final Total: ₹<span id="finalTotal">0</span>
+</h2>
+
+
+<a href="checkout.html">
+
+<button>
+Proceed To Checkout
+</button>
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+
+<script src="cart.js"></script>
+
+
+</body>
+
+</html>

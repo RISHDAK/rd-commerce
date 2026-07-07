@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Shop - R&D Commerce</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+R&D <span>COMMERCE</span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="cart.html">Cart</a>
+</nav>
+
+</header>
+
+<div class="shop-controls">
+
+<input
+type="text"
+id="searchBox"
+placeholder="🔍 Search Products">
+
+<select id="sortProducts">
+
+<option value="">Sort By</option>
+
+<option value="low">
+Price : Low to High
+</option>
+
+<option value="high">
+Price : High to Low
+</option>
+
+<option value="rating">
+Highest Rated
+</option>
+
+<option value="discount">
+Biggest Discount
+</option>
+
+</select>
+
+</div>
+
+<section class="products">
+
+<h1>Our Collection</h1>
+<div class="search-container">
+
+<input 
+type="text" 
+id="searchInput"
+placeholder="Search products..."
+>
+
+</div>
+
+
+<input 
+id="searchInput"
+placeholder="Search Products..."
+>
+
+
+<select id="sortSelect">
+
+<option value="default">
+Sort By
+</option>
+
+<option value="low">
+Price Low To High
+</option>
+
+<option value="high">
+Price High To Low
+</option>
+
+</select>
+
+
+
+<div id="product-container" class="product-grid">
+
+</div>
+
+
+</section>
+
+
+
+<script src="products.js"></script>
+<script src="shop.js"></script>
+
+</body>
+</html>

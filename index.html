@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>R&D Commerce</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+    <a href="index.html">
+        <span class="logo-rd">R&D</span>
+        <span class="logo-commerce">COMMERCE</span>
+    </a>
+</div>
+
+<nav>
+
+<a class="active" href="index.html">Home</a>
+
+<a href="shop.html">Shop</a>
+
+<a href="about.html">About</a>
+
+<a href="contact.html">Contact</a>
+
+<a href="wishlist.html">❤️ Wishlist</a>
+
+<a href="#" id="userMenu">Login</a>
+
+<a href="cart.html" class="cart-link">
+
+🛒 Cart
+
+<span id="cart-count">0</span>
+
+</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+    <div class="hero-overlay">
+
+        <div class="hero-content">
+
+            <h1>
+                Shop Smarter.
+                <span>Live Better.</span>
+            </h1>
+
+            <p>
+                Discover premium products with unbeatable prices,
+                secure payments and fast delivery.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="shop.html">
+                    <button class="primary-btn">
+                        Shop Now
+                    </button>
+                </a>
+
+                <a href="#categories">
+                    <button class="secondary-btn">
+                        Explore Collection
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+            <img src="image/hero.png" alt="Premium Products">
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="categories" id="categories">
+
+<h2>Shop by Category</h2>
+
+<div class="category-grid">
+
+<div class="category-card" onclick="showCategory('Electronics')">
+<div class="category-icon">📱</div>
+<h3>Electronics</h3>
+<p>Phones, Laptops & More</p>
+</div>
+
+<div class="category-card" onclick="showCategory('Fashion')">
+<div class="category-icon">👕</div>
+<h3>Fashion</h3>
+<p>Trending Styles</p>
+</div>
+
+<div class="category-card" onclick="showCategory('Accessories')">
+<div class="category-icon">⌚</div>
+<h3>Accessories</h3>
+<p>Watches & Essentials</p>
+</div>
+
+<div class="category-card" onclick="showCategory('Home')">
+<div class="category-icon">🏠</div>
+<h3>Home</h3>
+<p>Furniture & Decor</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="products">
+
+<h2>Featured Products</h2>
+
+
+<div class="search-container">
+
+<input 
+type="text" 
+id="homeSearchInput"
+placeholder="Search products..."
+>
+
+</div>
+
+
+
+
+<div id="home-products" class="product-grid">
+
+</div>
+
+</section>
+
+
+<footer>
+
+<h3>R&D Commerce</h3>
+<p>Premium Products. Worldwide Delivery.</p>
+
+</footer>
+
+
+<script src="products.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>	

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Account - R&D Commerce</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<section class="products">
+
+
+<div class="card">
+
+
+<h1>
+My Account
+</h1>
+
+
+<input 
+placeholder="Enter Your Name"
+id="username"
+>
+
+
+<br><br>
+
+
+<input 
+placeholder="Enter Email"
+id="email"
+>
+
+
+<br><br>
+
+
+<button onclick="saveAccount()">
+
+Save Details
+
+</button>
+
+<br><br>
+
+<button onclick="logout()">
+
+🚪 Logout
+
+</button>
+
+<h3 id="welcome"></h3>
+
+
+</div>
+
+
+</section>
+
+
+
+<script>
+
+
+function saveAccount(){
+
+
+let name =
+document.getElementById("username").value;
+
+
+localStorage.setItem(
+"username",
+name
+);
+
+
+
+document.getElementById("welcome").innerText =
+"Welcome "+name;
+
+
+}
+
+function logout(){
+
+localStorage.removeItem("user");
+
+alert("Logged Out Successfully!");
+
+window.location.href="login.html";
+
+}
+
+const user = JSON.parse(localStorage.getItem("user"));
+
+if(user){
+
+    document.getElementById("username").value = user.name;
+
+    document.getElementById("email").value = user.email;
+
+    document.getElementById("welcome").innerHTML =
+    "👋 Welcome, <strong>" + user.name + "</strong>";
+
+}
+
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,3 +1,24 @@
+// ===============================
+// PAGE LOADER
+// ===============================
+
+window.addEventListener("load", function () {
+
+    const loader = document.getElementById("page-loader");
+
+    if (loader) {
+
+        loader.style.opacity = "0";
+        loader.style.pointerEvents = "none";
+
+        setTimeout(function () {
+            loader.style.display = "none";
+        }, 300);
+
+    }
+
+});
+
 const homeBox = document.getElementById("home-products");
 
 

@@ -4,7 +4,7 @@
 
 window.addEventListener("load", function () {
 
-    const loader = document.getElementById("pageLoader");
+   const loader = document.getElementById("pageLoader");
 
     if (loader) {
 

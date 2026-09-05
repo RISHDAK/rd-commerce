@@ -7,6 +7,15 @@
 
 <body>
 
+<div id="pageLoader">
+    <div class="loader-content">
+        <div class="loader-logo">R&D</div>
+        <div class="loader-brand">COMMERCE</div>
+        <div class="loader-spinner"></div>
+        <p>Loading...</p>
+    </div>
+</div>
+
 <header>
 
 <div class="logo">
@@ -27,6 +36,10 @@
 <a href="contact.html">Contact</a>
 
 <a href="wishlist.html">❤️ Wishlist</a>
+
+<button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
+    🌙
+</button>
 
 <a href="#" id="userMenu">Login</a>
 
@@ -58,6 +71,30 @@
                 secure payments and fast delivery.
             </p>
 
+<div class="offer-box">
+
+    🔥 MEGA SALE
+
+    <span>
+
+        Flat 50% OFF
+
+    </span>
+
+</div>
+
+<div class="countdown">
+
+    Offer Ends In
+
+    <span id="timer">
+
+        12:00:00
+
+    </span>
+
+</div>
+
             <div class="hero-buttons">
 
                 <a href="shop.html">
@@ -82,9 +119,57 @@
 
     </div>
 
+<div class="hero-trust">
+    <div class="trust-item">
+        <span>🔒</span>
+        <div>
+            <strong>Secure Payments</strong>
+            <small>Safe & protected checkout</small>
+        </div>
+    </div>
+
+    <div class="trust-item">
+        <span>🚚</span>
+        <div>
+            <strong>Fast Delivery</strong>
+            <small>Quick & reliable shipping</small>
+        </div>
+    </div>
+
+    <div class="trust-item">
+        <span>↩️</span>
+        <div>
+            <strong>Easy Returns</strong>
+            <small>Simple return experience</small>
+        </div>
+    </div>
+</div>
+
 </section>
 
+<section class="stats">
 
+<div class="stat-box">
+<h2 id="customers">0</h2>
+<p>Happy Customers</p>
+</div>
+
+<div class="stat-box">
+<h2 id="orders">0</h2>
+<p>Orders Delivered</p>
+</div>
+
+<div class="stat-box">
+<h2 id="products">0</h2>
+<p>Premium Products</p>
+</div>
+
+<div class="stat-box">
+<h2>4.9★</h2>
+<p>Average Rating</p>
+</div>
+
+</section>
 
 <section class="categories" id="categories">
 
@@ -127,15 +212,15 @@
 
 <div class="search-container">
 
-<input 
-type="text" 
-id="homeSearchInput"
-placeholder="Search products..."
->
+    <input
+        type="text"
+        id="homeSearchInput"
+        placeholder="Search products..."
+    >
+
+    <div id="searchSuggestions"></div>
 
 </div>
-
-
 
 
 <div id="home-products" class="product-grid">
@@ -152,9 +237,13 @@ placeholder="Search products..."
 
 </footer>
 
+<div id="toast-container"></div>
+<button id="backToTop" aria-label="Back to top">
+    ↑
+</button>
 
-<script src="products.js"></script>
+<script src="products.js"></script>	
 <script src="script.js"></script>
 
 </body>
-</html>	
+</html>	    

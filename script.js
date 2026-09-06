@@ -286,3 +286,32 @@ function isLoggedIn(){
     return true;
 
 }
+function animateCounter(id, target){
+
+    let value = 0;
+
+    const element = document.getElementById(id);
+
+    if(!element) return;
+
+    const interval = setInterval(() => {
+
+        value += Math.ceil(target / 100);
+
+        if(value >= target){
+
+            value = target;
+            clearInterval(interval);
+
+        }
+
+        element.innerHTML =
+            value.toLocaleString() + "+";
+
+    }, 20);
+}
+
+
+animateCounter("customers", 25000);
+animateCounter("orders", 8500);
+animateCounter("products", 1200);

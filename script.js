@@ -315,3 +315,43 @@ function animateCounter(id, target){
 animateCounter("customers", 25000);
 animateCounter("orders", 8500);
 animateCounter("products", 1200);
+
+// =========================
+// SALE COUNTDOWN
+// =========================
+
+const timer = document.getElementById("timer");
+
+if (timer) {
+
+    let saleEnd = localStorage.getItem("saleEndTime");
+
+    if (!saleEnd || Date.now() >= Number(saleEnd)) {
+        saleEnd = Date.now() + (12 * 60 * 60 * 1000);
+        localStorage.setItem("saleEndTime", saleEnd);
+    }
+
+    function updateCountdown() {
+
+        let remaining = Number(saleEnd) - Date.now();
+
+        if (remaining <= 0) {
+            timer.innerHTML = "00:00:00";
+            return;
+        }
+
+        let totalSeconds = Math.floor(remaining / 1000);
+
+        let hours = Math.floor(totalSeconds / 3600);
+        let minutes = Math.floor((totalSeconds % 3600) / 60);
+        let seconds = totalSeconds % 60;
+
+        timer.innerHTML =
+            String(hours).padStart(2, "0") + ":" +
+            String(minutes).padStart(2, "0") + ":" +
+            String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}

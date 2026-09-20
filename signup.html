@@ -2,69 +2,188 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create Account - R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account - R&D Commerce</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
+
 
 <header>
 
-<div class="logo">
-R&D <span>COMMERCE</span>
-</div>
+    <div class="logo">
 
-<nav>
+        <a href="index.html">
 
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="cart.html">Cart</a>
-<a href="login.html">Login</a>
+            <span class="logo-rd">
+                R&D
+            </span>
 
-</nav>
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+            🛒 Cart
+            <span id="cart-count">
+                0
+            </span>
+        </a>
+
+    </nav>
 
 </header>
 
+
+
 <section class="auth-container">
 
-<div class="auth-card">
 
-<h1>Create Account</h1>
+    <div class="auth-card">
 
-<input type="text" id="signupName" placeholder="Full Name">
 
-<input type="email" id="signupEmail" placeholder="Email">
+        <h1>
+            Create Account ✨
+        </h1>
 
-<input type="password" id="signupPassword" placeholder="Password">
 
-<button id="signupBtn">
+        <p>
+            Join R&D Commerce and start shopping
+        </p>
 
-Create Account
 
-</button>
+        <form id="signupForm">
 
-<p>
 
-Already have an account?
+            <input
+                type="text"
+                id="signupName"
+                placeholder="Full Name"
+                autocomplete="name"
+                required
+            >
 
-<a href="login.html">
 
-Login
+            <input
+                type="email"
+                id="signupEmail"
+                placeholder="Email Address"
+                autocomplete="email"
+                required
+            >
 
-</a>
 
-</p>
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Password"
+                autocomplete="new-password"
+                minlength="6"
+                required
+            >
 
-</div>
+
+            <button
+                type="submit"
+                id="signupBtn"
+            >
+                Create Account
+            </button>
+
+
+        </form>
+
+
+        <p>
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </p>
+
+
+    </div>
+
 
 </section>
 
+
+
+<div id="toast-container"></div>
+
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<script src="script.js"></script>
+
 <script src="signup.js"></script>
+
 
 </body>
 

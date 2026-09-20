@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Wishlist - R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wishlist - R&D Commerce</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -13,19 +20,119 @@
 <body>
 
 
-<section class="products">
+<header>
 
-<h1>
-My Wishlist ❤️
-</h1>
+    <div class="logo">
+
+        <a href="index.html">
+
+            <span class="logo-rd">
+                R&D
+            </span>
+
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
 
 
-<div id="wishlist-items"></div>
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a
+            href="wishlist.html"
+            class="active"
+        >
+            ❤️ Wishlist
+        </a>
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+            🛒 Cart
+            <span id="cart-count">
+                0
+            </span>
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<section class="products wishlist-page">
+
+
+    <h1>
+        My Wishlist ❤️
+    </h1>
+
+
+    <p class="shop-subtitle">
+        Your saved products are waiting for you.
+    </p>
+
+
+    <div
+        id="wishlist-items"
+        class="product-grid"
+    ></div>
 
 
 </section>
 
 
+
+<div id="toast-container"></div>
+
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<script src="products.js"></script>
+
+<script src="script.js"></script>
 
 <script src="wishlist.js"></script>
 

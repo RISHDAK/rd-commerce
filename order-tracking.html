@@ -1,60 +1,175 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
 
-<title>Track Order</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Track Order - R&D Commerce</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
+
 
 <header>
 
-<div class="logo">
+    <div class="logo">
 
-R&D <span>COMMERCE</span>
+        <a href="index.html">
 
-</div>
+            <span class="logo-rd">
+                R&D
+            </span>
+
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+            🛒 Cart
+            <span id="cart-count">
+                0
+            </span>
+        </a>
+
+    </nav>
 
 </header>
 
 
+
 <section class="products">
 
-<div class="card">
 
-<h1>
+    <div class="card order-tracking-card">
 
-Track Your Order
 
-</h1>
+        <h1>
+            Track Your Order 🚚
+        </h1>
 
-<input
-type="text"
-id="orderId"
-placeholder="Enter Order ID">
 
-<br><br>
+        <p>
+            Enter your Order ID to check your order status.
+        </p>
 
-<button onclick="trackOrder()">
 
-Track
+        <div class="tracking-form">
 
-</button>
+            <input
+                type="text"
+                id="orderId"
+                placeholder="Enter Order ID (e.g. RD12345678)"
+                autocomplete="off"
+                aria-label="Order ID"
+            >
 
-<br><br>
 
-<div id="status"></div>
+            <button
+                type="button"
+                onclick="trackOrder()"
+            >
+                Track Order
+            </button>
 
-</div>
+        </div>
+
+
+        <div
+            id="status"
+            class="order-status"
+        ></div>
+
+
+        <br>
+
+
+        <a href="index.html">
+
+            <button type="button">
+                Continue Shopping
+            </button>
+
+        </a>
+
+
+    </div>
+
 
 </section>
 
+
+
+<div id="toast-container"></div>
+
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<script src="script.js"></script>
+
 <script src="order-tracking.js"></script>
+
 
 </body>
 

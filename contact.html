@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Contact R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Contact Us - R&D Commerce</title>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -13,42 +20,191 @@
 <body>
 
 
-<section class="products">
+<header>
+
+    <div class="logo">
+
+        <a href="index.html">
+
+            <span class="logo-rd">
+                R&D
+            </span>
+
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
 
 
-<div class="card">
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html" class="active">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+            🛒 Cart
+            <span id="cart-count">
+                0
+            </span>
+        </a>
+
+    </nav>
+
+</header>
 
 
-<h1>
-Contact Us
-</h1>
+
+<section class="products contact-page">
 
 
-<input placeholder="Your Name">
-
-<br><br>
-
-<input placeholder="Email">
+    <div class="card contact-card">
 
 
-<br><br>
+        <h1>
+            Contact Us 📩
+        </h1>
 
 
-<textarea placeholder="Message"></textarea>
+        <p>
+            Have a question or need help?
+            Send us a message and we'll get back to you.
+        </p>
 
 
-<br><br>
+        <form id="contactForm">
 
 
-<button>
-Send Message
-</button>
+            <input
+                type="text"
+                id="contactName"
+                placeholder="Your Name"
+                autocomplete="name"
+                required
+            >
 
 
-</div>
+            <input
+                type="email"
+                id="contactEmail"
+                placeholder="Email Address"
+                autocomplete="email"
+                required
+            >
+
+
+            <textarea
+                id="contactMessage"
+                placeholder="Write your message..."
+                rows="6"
+                required
+            ></textarea>
+
+
+            <button
+                type="submit"
+            >
+                Send Message
+            </button>
+
+
+        </form>
+
+
+        <div class="contact-info">
+
+            <h2>
+                R&D Commerce Support
+            </h2>
+
+            <p>
+                📧 Email: support@rdcommerce.com
+            </p>
+
+            <p>
+                🌍 Worldwide Customer Support
+            </p>
+
+            <p>
+                🕒 We aim to respond as soon as possible.
+            </p>
+
+        </div>
+
+
+    </div>
 
 
 </section>
+
+
+
+<footer>
+
+    <h3>
+        R&D Commerce
+    </h3>
+
+    <p>
+        Premium Products. Worldwide Delivery.
+    </p>
+
+</footer>
+
+
+
+<div id="toast-container"></div>
+
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<script src="script.js"></script>
+
+<script src="contact.js"></script>
 
 
 </body>

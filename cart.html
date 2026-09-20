@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Cart - R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Cart - R&D Commerce</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -13,83 +23,218 @@
 <body>
 
 
+<!-- ============================= -->
+<!-- HEADER -->
+<!-- ============================= -->
+
 <header>
 
-<div class="logo">
-R&D <span>COMMERCE</span>
-</div>
+    <div class="logo">
+
+        <a href="index.html">
+
+            <span class="logo-rd">
+                R&D
+            </span>
+
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
 
 
-<nav>
+    <nav>
 
-<a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
-<a href="shop.html">Shop</a>
+        <a href="shop.html">
+            Shop
+        </a>
 
-</nav>
+        <a href="about.html">
+            About
+        </a>
 
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+
+            🛒 Cart
+
+            <span id="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </nav>
 
 </header>
 
 
 
+<!-- ============================= -->
+<!-- CART -->
+<!-- ============================= -->
+
 <section class="cart-section">
 
 
-<h1>Your Shopping Cart</h1>
+    <h1>
+        Your Shopping Cart
+    </h1>
 
 
-<div id="cart-items"></div>
+    <div id="cart-items">
+
+    </div>
 
 
 
-<div class="cart-summary">
+    <!-- ========================= -->
+    <!-- CART SUMMARY -->
+    <!-- ========================= -->
 
-<h2>
-Total: ₹<span id="total">0</span>
-</h2>
-
-<div class="discount-box">
-
-<input 
-type="text" 
-id="coupon"
-placeholder="Enter coupon code"
->
-
-<button onclick="applyCoupon()">
-Apply
-</button>
-
-</div>
+    <div class="cart-summary">
 
 
-<p>
-Discount: ₹<span id="discount">0</span>
-</p>
+        <h2>
+
+            Total:
+            ₹<span id="total">0</span>
+
+        </h2>
 
 
-<h2>
-Final Total: ₹<span id="finalTotal">0</span>
-</h2>
+        <div class="discount-box">
 
 
-<a href="checkout.html">
+            <input
+                type="text"
+                id="coupon"
+                placeholder="Enter coupon code"
+                autocomplete="off"
+            >
 
-<button>
-Proceed To Checkout
-</button>
 
-</a>
+            <button
+                type="button"
+                onclick="applyCoupon()"
+            >
+                Apply
+            </button>
 
 
-</div>
+        </div>
+
+
+        <p>
+
+            Discount:
+            ₹<span id="discount">0</span>
+
+        </p>
+
+
+        <h2>
+
+            Final Total:
+            ₹<span id="finalTotal">0</span>
+
+        </h2>
+
+
+        <a href="checkout.html">
+
+            <button
+                type="button"
+            >
+                Proceed To Checkout
+            </button>
+
+        </a>
+
+
+        <br>
+        <br>
+
+
+        <a href="shop.html">
+
+            <button
+                type="button"
+            >
+                Continue Shopping
+            </button>
+
+        </a>
+
+
+    </div>
 
 
 </section>
 
 
 
+<!-- ============================= -->
+<!-- TOAST -->
+<!-- ============================= -->
+
+<div id="toast-container"></div>
+
+
+
+<!-- ============================= -->
+<!-- BACK TO TOP -->
+<!-- ============================= -->
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<!-- ============================= -->
+<!-- SCRIPTS -->
+<!-- ============================= -->
+
+<script src="script.js"></script>
 
 <script src="cart.js"></script>
 

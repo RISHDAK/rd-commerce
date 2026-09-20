@@ -2,73 +2,179 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login - R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - R&D Commerce</title>
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
 <header>
 
-<div class="logo">
-R&D <span>COMMERCE</span>
-</div>
+    <div class="logo">
 
-<nav>
+        <a href="index.html">
 
-<a href="index.html">Home</a>
-<a href="shop.html">Shop</a>
-<a href="cart.html">Cart</a>
+            <span class="logo-rd">
+                R&D
+            </span>
 
-</nav>
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="shop.html">
+            Shop
+        </a>
+
+        <a href="about.html">
+            About
+        </a>
+
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+        <a
+            href="login.html"
+            id="userMenu"
+            class="active"
+        >
+            Login
+        </a>
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+            🛒 Cart
+            <span id="cart-count">
+                0
+            </span>
+        </a>
+
+    </nav>
 
 </header>
 
+
+
 <section class="auth-container">
 
-<div class="auth-card">
 
-<h1>Welcome Back 👋</h1>
+    <div class="auth-card">
 
-<p>Login to continue shopping</p>
 
-<input
-type="email"
-id="loginEmail"
-placeholder="Email Address">
+        <h1>
+            Welcome Back 👋
+        </h1>
 
-<input
-type="password"
-id="loginPassword"
-placeholder="Password">
 
-<button id="loginBtn">
+        <p>
+            Login to continue shopping
+        </p>
 
-Login
 
-</button>
+        <form id="loginForm">
 
-<p>
 
-Don't have an account?
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Email Address"
+                autocomplete="email"
+                required
+            >
 
-<a href="signup.html">
 
-Create Account
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+            >
 
-</a>
 
-</p>
+            <button
+                type="submit"
+                id="loginBtn"
+            >
+                Login
+            </button>
 
-</div>
+
+        </form>
+
+
+        <p>
+
+            Don't have an account?
+
+            <a href="signup.html">
+                Create Account
+            </a>
+
+        </p>
+
+
+    </div>
+
 
 </section>
 
+
+
+<div id="toast-container"></div>
+
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<script src="script.js"></script>
+
 <script src="login.js"></script>
+
 
 </body>
 

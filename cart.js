@@ -1,144 +1,256 @@
-// ===============================
-// CART DATA
-// ===============================
+// =========================================================
+// R&D COMMERCE — CART SYSTEM
+// =========================================================
 
-let discountAmount = 0;
+
+// =========================================================
+// SAFE STORAGE
+// =========================================================
+
+function getCartData() {
+
+    try {
+
+        const savedCart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            );
+
+
+        return Array.isArray(savedCart)
+            ? savedCart
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function getSavedDiscount() {
+
+    const saved =
+        Number(
+            localStorage.getItem(
+                "discountAmount"
+            )
+        );
+
+
+    return Number.isFinite(saved) &&
+        saved > 0
+        ? saved
+        : 0;
+
+}
+
+
+// =========================================================
+// CART DATA
+// =========================================================
 
 let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
+    getCartData();
 
+
+let discountAmount =
+    getSavedDiscount();
+
+
+// =========================================================
+// ELEMENTS
+// =========================================================
 
 const box =
-    document.getElementById("cart-items");
+    document.getElementById(
+        "cart-items"
+    );
+
 
 const total =
-    document.getElementById("total");
+    document.getElementById(
+        "total"
+    );
+
 
 const discount =
-    document.getElementById("discount");
+    document.getElementById(
+        "discount"
+    );
+
 
 const finalTotal =
-    document.getElementById("finalTotal");
+    document.getElementById(
+        "finalTotal"
+    );
 
 
-// ===============================
+// =========================================================
+// SAVE DISCOUNT
+// =========================================================
+
+function saveDiscount() {
+
+    localStorage.setItem(
+        "discountAmount",
+        String(discountAmount)
+    );
+
+}
+
+
+// =========================================================
 // DISPLAY CART
-// ===============================
+// =========================================================
 
-function displayCart(){
+function displayCart() {
 
-    if(!box){
+    if (!box) {
         return;
     }
 
+
     box.innerHTML = "";
 
-    let sum = 0;
+
+    let subtotal = 0;
 
 
+    // =====================================================
     // EMPTY CART
+    // =====================================================
 
-    if(cart.length === 0){
+    if (cart.length === 0) {
+
+        discountAmount = 0;
+
+        saveDiscount();
+
 
         box.innerHTML = `
+
             <div class="empty-cart">
-                <h2>Your cart is empty 🛒</h2>
-                <p>Add some products to continue shopping.</p>
+
+                <h2>
+                    Your cart is empty 🛒
+                </h2>
+
+                <p>
+                    Add some products to
+                    continue shopping.
+                </p>
+
 
                 <a href="shop.html">
-                    <button>Continue Shopping</button>
+
+                    <button type="button">
+                        Continue Shopping
+                    </button>
+
                 </a>
+
             </div>
+
         `;
 
-        if(total){
-            total.innerText = "0";
-        }
 
-        if(discount){
-            discount.innerText = "0";
-        }
+        updateTotals(
+            0,
+            0
+        );
 
-        if(finalTotal){
-            finalTotal.innerText = "0";
-        }
 
         updateCartCount();
 
         return;
+
     }
 
 
+    // =====================================================
     // CART ITEMS
+    // =====================================================
 
-    cart.forEach((item, index) => {
+    cart.forEach(
+        function (item, index) {
 
-        sum += Number(item.price);
-
-
-        box.innerHTML += `
-
-            <div class="cart-card">
-
-                <img
-                    src="${item.image}"
-                    alt="${item.name}"
-                >
+            const price =
+                Number(item.price) || 0;
 
 
-                <div>
-
-                    <h3>
-                        ${item.name}
-                    </h3>
+            subtotal += price;
 
 
-                    <p>
-                        ₹${item.price}
-                    </p>
+            box.innerHTML += `
+
+                <div class="cart-card">
 
 
-                    <div class="cart-actions">
+                    <img
+                        src="${item.image || ""}"
+                        alt="${item.name || "Product"}"
+                    >
 
-                        <button
-                            onclick="removeItem(${index})"
-                        >
-                            🗑️ Remove
-                        </button>
+
+                    <div>
+
+
+                        <h3>
+                            ${item.name || "Product"}
+                        </h3>
+
+
+                        <p>
+                            ₹${price.toLocaleString("en-IN")}
+                        </p>
+
+
+                        <div class="cart-actions">
+
+
+                            <button
+                                type="button"
+                                onclick="removeItem(${index})"
+                            >
+                                🗑️ Remove
+                            </button>
+
+
+                        </div>
+
 
                     </div>
 
+
                 </div>
 
-            </div>
+            `;
 
-        `;
-
-    });
-
-
-    // TOTAL
-
-    let finalAmount =
-        Math.max(0, sum - discountAmount);
+        }
+    );
 
 
-    if(total){
-        total.innerText =
-            sum.toLocaleString();
+    // =====================================================
+    // SAFETY CHECK FOR DISCOUNT
+    // =====================================================
+
+    if (discountAmount > subtotal) {
+
+        discountAmount =
+            subtotal;
+
+        saveDiscount();
+
     }
 
 
-    if(discount){
-        discount.innerText =
-            discountAmount.toLocaleString();
-    }
-
-
-    if(finalTotal){
-        finalTotal.innerText =
-            finalAmount.toLocaleString();
-    }
+    updateTotals(
+        subtotal,
+        discountAmount
+    );
 
 
     updateCartCount();
@@ -146,14 +258,67 @@ function displayCart(){
 }
 
 
-// ===============================
+// =========================================================
+// UPDATE TOTALS
+// =========================================================
+
+function updateTotals(
+    subtotal,
+    discountValue
+) {
+
+    const finalAmount =
+        Math.max(
+            0,
+            subtotal - discountValue
+        );
+
+
+    if (total) {
+
+        total.innerText =
+            subtotal.toLocaleString(
+                "en-IN"
+            );
+
+    }
+
+
+    if (discount) {
+
+        discount.innerText =
+            discountValue.toLocaleString(
+                "en-IN"
+            );
+
+    }
+
+
+    if (finalTotal) {
+
+        finalTotal.innerText =
+            finalAmount.toLocaleString(
+                "en-IN"
+            );
+
+    }
+
+}
+
+
+// =========================================================
 // REMOVE ITEM
-// ===============================
+// =========================================================
 
-function removeItem(index){
+function removeItem(index) {
 
-    if(index < 0 || index >= cart.length){
+    if (
+        index < 0 ||
+        index >= cart.length
+    ) {
+
         return;
+
     }
 
 
@@ -161,7 +326,10 @@ function removeItem(index){
         cart[index];
 
 
-    cart.splice(index, 1);
+    cart.splice(
+        index,
+        1
+    );
 
 
     localStorage.setItem(
@@ -170,68 +338,123 @@ function removeItem(index){
     );
 
 
-    // Recalculate discount
+    // Recalculate subtotal
 
-    if(cart.length === 0){
+    let subtotal = 0;
+
+
+    cart.forEach(
+        function (item) {
+
+            subtotal +=
+                Number(item.price) || 0;
+
+        }
+    );
+
+
+    // Prevent discount from
+    // becoming larger than subtotal
+
+    if (
+        cart.length === 0
+    ) {
 
         discountAmount = 0;
 
     }
 
+    else if (
+        discountAmount > subtotal
+    ) {
 
-    if(typeof showToast === "function"){
+        discountAmount =
+            subtotal;
+
+    }
+
+
+    saveDiscount();
+
+
+    if (
+        typeof showToast ===
+        "function"
+    ) {
 
         showToast(
-            removedItem.name +
+
+            (removedItem.name ||
+                "Product") +
             " removed from cart",
+
             "🗑️"
+
         );
 
     }
 
-localStorage.setItem(
-    "discountAmount",
-    discountAmount
-);
+
     displayCart();
 
 }
 
 
-// ===============================
+// =========================================================
 // APPLY COUPON
-// ===============================
+// =========================================================
 
-function applyCoupon(){
+function applyCoupon() {
 
     const couponInput =
-        document.getElementById("coupon");
+        document.getElementById(
+            "coupon"
+        );
 
 
-    if(!couponInput){
+    if (!couponInput) {
         return;
     }
 
 
     const code =
-        couponInput.value.trim().toUpperCase();
+        couponInput.value
+            .trim()
+            .toUpperCase();
 
+
+    // =====================================================
+    // CALCULATE SUBTOTAL
+    // =====================================================
 
     let subtotal = 0;
 
 
-    cart.forEach(item => {
+    cart.forEach(
+        function (item) {
 
-        subtotal += Number(item.price);
+            subtotal +=
+                Number(item.price) || 0;
 
-    });
+        }
+    );
 
 
-    if(cart.length === 0){
+    // =====================================================
+    // EMPTY CART
+    // =====================================================
+
+    if (cart.length === 0) {
 
         discountAmount = 0;
 
-        if(typeof showToast === "function"){
+        saveDiscount();
+
+
+        if (
+            typeof showToast ===
+            "function"
+        ) {
 
             showToast(
                 "Your cart is empty",
@@ -239,10 +462,8 @@ function applyCoupon(){
             );
 
         }
-localStorage.setItem(
-    "discountAmount",
-    discountAmount
-);
+
+
         displayCart();
 
         return;
@@ -250,14 +471,51 @@ localStorage.setItem(
     }
 
 
+    // =====================================================
+    // EMPTY COUPON
+    // =====================================================
+
+    if (!code) {
+
+        discountAmount = 0;
+
+        saveDiscount();
+
+
+        if (
+            typeof showToast ===
+            "function"
+        ) {
+
+            showToast(
+                "Please enter a coupon code",
+                "⚠️"
+            );
+
+        }
+
+
+        displayCart();
+
+        return;
+
+    }
+
+
+    // =====================================================
     // RISHU — 100% OFF
+    // =====================================================
 
-    if(code === "RISHU"){
+    if (code === "RISHU") {
 
-        discountAmount = subtotal;
+        discountAmount =
+            subtotal;
 
 
-        if(typeof showToast === "function"){
+        if (
+            typeof showToast ===
+            "function"
+        ) {
 
             showToast(
                 "RISHU coupon applied — 100% OFF",
@@ -269,15 +527,20 @@ localStorage.setItem(
     }
 
 
+    // =====================================================
     // SAVE10 — 10% OFF
+    // =====================================================
 
-    else if(code === "SAVE10"){
+    else if (code === "SAVE10") {
 
         discountAmount =
             subtotal * 0.10;
 
 
-        if(typeof showToast === "function"){
+        if (
+            typeof showToast ===
+            "function"
+        ) {
 
             showToast(
                 "10% discount applied",
@@ -289,15 +552,23 @@ localStorage.setItem(
     }
 
 
+    // =====================================================
     // WELCOME — ₹200 OFF
+    // =====================================================
 
-    else if(code === "WELCOME"){
+    else if (code === "WELCOME") {
 
         discountAmount =
-            Math.min(200, subtotal);
+            Math.min(
+                200,
+                subtotal
+            );
 
 
-        if(typeof showToast === "function"){
+        if (
+            typeof showToast ===
+            "function"
+        ) {
 
             showToast(
                 "₹200 discount applied",
@@ -309,14 +580,19 @@ localStorage.setItem(
     }
 
 
-    // INVALID
+    // =====================================================
+    // INVALID COUPON
+    // =====================================================
 
-    else{
+    else {
 
         discountAmount = 0;
 
 
-        if(typeof showToast === "function"){
+        if (
+            typeof showToast ===
+            "function"
+        ) {
 
             showToast(
                 "Invalid coupon code",
@@ -328,22 +604,29 @@ localStorage.setItem(
     }
 
 
+    // Save for checkout
+
+    saveDiscount();
+
+
     displayCart();
 
 }
 
 
-// ===============================
+// =========================================================
 // CART COUNT
-// ===============================
+// =========================================================
 
-function updateCartCount(){
+function updateCartCount() {
 
     const count =
-        document.getElementById("cart-count");
+        document.getElementById(
+            "cart-count"
+        );
 
 
-    if(!count){
+    if (!count) {
         return;
     }
 
@@ -354,9 +637,10 @@ function updateCartCount(){
 }
 
 
-// ===============================
-// INITIAL LOAD
-// ===============================
+// =========================================================
+// INITIALIZE
+// =========================================================
 
 displayCart();
+
 updateCartCount();

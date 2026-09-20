@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Product - R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Product - R&D Commerce</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -13,95 +23,208 @@
 <body>
 
 
+<!-- ============================= -->
+<!-- HEADER -->
+<!-- ============================= -->
+
 <header>
 
-<div class="logo">
-R&D <span>COMMERCE</span>
-</div>
+    <div class="logo">
+
+        <a href="index.html">
+
+            <span class="logo-rd">
+                R&D
+            </span>
+
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
 
 
-<nav>
+    <nav>
 
-<a href="index.html">Home</a>
+        <a href="index.html">
+            Home
+        </a>
 
-<a href="shop.html">Shop</a>
+        <a href="shop.html">
+            Shop
+        </a>
 
-<a href="cart.html">Cart</a>
+        <a href="about.html">
+            About
+        </a>
 
-</nav>
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+
+            🛒 Cart
+
+            <span id="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </nav>
 
 </header>
 
 
 
+<!-- ============================= -->
+<!-- PRODUCT SECTION -->
+<!-- ============================= -->
+
 <section class="product-section">
 
 
-<div id="product-details">
+    <!-- Product details are inserted by product.js -->
+
+    <div id="product-details">
+
+    </div>
 
 
-</div>
 
-<div class="reviews">
+    <!-- ========================= -->
+    <!-- REVIEWS -->
+    <!-- ========================= -->
 
-<h2>
-Customer Reviews
-</h2>
+    <div class="reviews">
 
-
-<div class="rating-summary">
-
-<h3>
-⭐⭐⭐⭐⭐ 4.8 out of 5
-</h3>
-
-</div>
+        <h2>
+            Customer Reviews
+        </h2>
 
 
-<div id="review-list">
+        <div class="rating-summary">
 
-</div>
+            <h3>
+                ⭐⭐⭐⭐⭐ 4.8 out of 5
+            </h3>
 
-
-<h3>
-Write a Review
-</h3>
-
-
-<div class="stars">
-
-⭐⭐⭐⭐⭐
-
-</div>
+        </div>
 
 
-<textarea 
-id="reviewText"
-placeholder="Write your experience..."
-></textarea>
+        <div id="review-list">
+
+        </div>
 
 
-<br><br>
+        <h3>
+            Write a Review
+        </h3>
 
 
-<button onclick="addReview()">
-Submit Review
-</button>
+        <div class="stars">
+            ⭐⭐⭐⭐⭐
+        </div>
 
 
-</div>
+        <textarea
+            id="reviewText"
+            placeholder="Write your experience..."
+            aria-label="Write your review"
+        ></textarea>
+
+
+        <br>
+        <br>
+
+
+        <button
+            type="button"
+            onclick="addReview()"
+        >
+            Submit Review
+        </button>
+
+    </div>
+
 </section>
+
+
+
+<!-- ============================= -->
+<!-- RELATED PRODUCTS -->
+<!-- ============================= -->
 
 <section class="related-products">
 
-<h2>You May Also Like</h2>
+    <h2>
+        You May Also Like
+    </h2>
 
-<div id="related-products"></div>
+
+    <div id="related-products">
+
+    </div>
 
 </section>
 
 
+
+<!-- ============================= -->
+<!-- TOAST -->
+<!-- ============================= -->
+
+<div id="toast-container"></div>
+
+
+<!-- ============================= -->
+<!-- BACK TO TOP -->
+<!-- ============================= -->
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<!-- ============================= -->
+<!-- SCRIPTS -->
+<!-- ============================= -->
+
 <script src="products.js"></script>
+
+<script src="script.js"></script>
 
 <script src="product.js"></script>
 

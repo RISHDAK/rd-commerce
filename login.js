@@ -1,29 +1,83 @@
-document.getElementById("loginBtn").addEventListener("click", () => {
+// =========================================================
+// R&D COMMERCE — LOGIN SYSTEM
+// =========================================================
 
-    const email = document.getElementById("loginEmail").value;
+const loginForm = document.getElementById("loginForm");
 
-    const password = document.getElementById("loginPassword").value;
+function getSavedUser() {
+    try {
+        const savedUser = JSON.parse(localStorage.getItem("user"));
 
-    const user = JSON.parse(localStorage.getItem("user"));
+        if (savedUser && typeof savedUser === "object") {
+            return savedUser;
+        }
 
-    if (!user) {
+        return null;
 
-        alert("Please create an account first.");
-
-        return;
-
+    } catch (error) {
+        return null;
     }
+}
 
-    if (email === user.email && password === user.password) {
+if (loginForm) {
 
-        alert("Login Successful!");
+    loginForm.addEventListener("submit", function (event) {
 
-        window.location.href = "index.html";
+        event.preventDefault();
 
-    } else {
+        const emailInput = document.getElementById("loginEmail");
+        const passwordInput = document.getElementById("loginPassword");
 
-        alert("Invalid Email or Password");
+        if (!emailInput || !passwordInput) return;
 
-    }
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
 
-});
+        if (!email || !password) {
+
+            if (typeof showToast === "function") {
+                showToast("Please fill all fields", "⚠️");
+            }
+
+            return;
+        }
+
+        const user = getSavedUser();
+
+        if (!user) {
+
+            if (typeof showToast === "function") {
+                showToast("Please create an account first", "👤");
+            }
+
+            setTimeout(function () {
+                window.location.href = "signup.html";
+            }, 800);
+
+            return;
+        }
+
+        const savedEmail = String(user.email || "").trim().toLowerCase();
+        const savedPassword = String(user.password || "");
+
+        if (email === savedEmail && password === savedPassword) {
+
+            if (typeof showToast === "function") {
+                showToast("Login successful! Welcome back 👋", "✅");
+            }
+
+            setTimeout(function () {
+                window.location.href = "index.html";
+            }, 700);
+
+        } else {
+
+            if (typeof showToast === "function") {
+                showToast("Invalid email or password", "❌");
+            }
+
+        }
+
+    });
+
+}

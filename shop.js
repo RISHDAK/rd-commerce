@@ -1,129 +1,284 @@
+// =========================================================
+// R&D COMMERCE — SHOP SYSTEM
+// =========================================================
+
+
+// PRODUCT CONTAINER
 const container =
-document.getElementById("product-container");
+    document.getElementById("product-container");
 
 
-function displayProducts(items){
+// SEARCH + SORT ELEMENTS
+const searchBox =
+    document.getElementById("searchBox");
+
+const sortProducts =
+    document.getElementById("sortProducts");
 
 
-container.innerHTML="";
+// CURRENT PRODUCT LIST
+let currentProducts = [...products];
 
 
-items.forEach(product=>{
+
+// =========================================================
+// DISPLAY PRODUCTS
+// =========================================================
+
+function displayShopProducts(items) {
+
+    if (!container) {
+        return;
+    }
 
 
-let card=document.createElement("div");
+    container.innerHTML = "";
 
 
-card.className="card";
+    if (!Array.isArray(items) || items.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-products">
+
+                <h2>
+                    No Products Found
+                </h2>
+
+                <p>
+                    Try a different search or sorting option.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
-card.innerHTML=`
+    items.forEach(function(product) {
 
-<img src="${product.image}">
+        // Use the master product card when available
+        if (typeof productCard === "function") {
 
-<h3>${product.name}</h3>
+            container.innerHTML +=
+                productCard(product);
 
-<p>${product.category}</p>
+            return;
 
-<h4>₹${product.price}</h4>
-
-<button onclick="openProduct(${product.id})">
-View Product
-</button>
-
-`;
-
-container.appendChild(card);
+        }
 
 
-});
+        // Fallback card
+        const card =
+            document.createElement("div");
 
+        card.className = "card";
+
+
+        card.innerHTML = `
+
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+                loading="lazy"
+            >
+
+            <h3>
+                ${product.name}
+            </h3>
+
+            <p>
+                ${product.category}
+            </p>
+
+            <div class="rating">
+                ⭐ ${product.rating}
+                (${product.reviews} Reviews)
+            </div>
+
+            <h4>
+                ₹${Number(product.price).toLocaleString("en-IN")}
+            </h4>
+
+            <button
+                type="button"
+                onclick="openProduct(${product.id})"
+            >
+                View Product
+            </button>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+
+// =========================================================
+// FILTER + SORT
+// =========================================================
+
+function updateShopProducts() {
+
+    if (!Array.isArray(products)) {
+        return;
+    }
+
+
+    const searchValue =
+        searchBox
+            ? searchBox.value.trim().toLowerCase()
+            : "";
+
+
+    let result =
+        products.filter(function(product) {
+
+            if (!searchValue) {
+                return true;
+            }
+
+
+            return (
+
+                product.name
+                    .toLowerCase()
+                    .includes(searchValue)
+
+                ||
+
+                product.category
+                    .toLowerCase()
+                    .includes(searchValue)
+
+                ||
+
+                product.description
+                    .toLowerCase()
+                    .includes(searchValue)
+
+            );
+
+        });
+
+
+
+    // SORT
+    const sortValue =
+        sortProducts
+            ? sortProducts.value
+            : "";
+
+
+    if (sortValue === "low") {
+
+        result.sort(function(a, b) {
+
+            return Number(a.price) -
+                   Number(b.price);
+
+        });
+
+    }
+
+
+    else if (sortValue === "high") {
+
+        result.sort(function(a, b) {
+
+            return Number(b.price) -
+                   Number(a.price);
+
+        });
+
+    }
+
+
+    else if (sortValue === "rating") {
+
+        result.sort(function(a, b) {
+
+            return Number(b.rating) -
+                   Number(a.rating);
+
+        });
+
+    }
+
+
+    else if (sortValue === "discount") {
+
+        result.sort(function(a, b) {
+
+            return Number(b.discount || 0) -
+                   Number(a.discount || 0);
+
+        });
+
+    }
+
+
+    currentProducts = result;
+
+
+    displayShopProducts(currentProducts);
 
 }
 
 
 
-displayProducts(products);
-const searchInput = document.getElementById("searchInput");
+// =========================================================
+// SEARCH
+// =========================================================
 
+if (searchBox) {
 
-searchInput.addEventListener("input", function(){
-
-let searchValue = this.value.toLowerCase();
-
-
-let filteredProducts = products.filter(product =>
-
-product.name
-.toLowerCase()
-.includes(searchValue)
-
-);
-
-
-displayProducts(filteredProducts);
-
-
-});
-
-
-function openProduct(id){
-
-window.location.href=
-"product.html?id="+id;
+    searchBox.addEventListener(
+        "input",
+        updateShopProducts
+    );
 
 }
 
 
 
+// =========================================================
+// SORT
+// =========================================================
 
-document
-.getElementById("searchInput")
-.addEventListener("input",function(){
+if (sortProducts) {
 
-
-let value=this.value.toLowerCase();
-
-
-let result=products.filter(product=>
-
-product.name
-.toLowerCase()
-.includes(value)
-
-);
-
-
-displayProducts(result);
-
-
-});
-
-
-
-document
-.getElementById("sortSelect")
-.addEventListener("change",function(){
-
-
-let sorted=[...products];
-
-
-if(this.value=="low"){
-
-sorted.sort((a,b)=>a.price-b.price);
+    sortProducts.addEventListener(
+        "change",
+        updateShopProducts
+    );
 
 }
 
 
-if(this.value=="high"){
 
-sorted.sort((a,b)=>b.price-a.price);
+// =========================================================
+// OPEN PRODUCT
+// =========================================================
+
+function openProduct(id) {
+
+    window.location.href =
+        "product.html?id=" + id;
 
 }
 
 
-displayProducts(sorted);
 
+// =========================================================
+// INITIALIZE SHOP
+// =========================================================
 
-});
+updateShopProducts();

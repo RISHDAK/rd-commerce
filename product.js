@@ -1,334 +1,829 @@
+// =========================================================
+// R&D COMMERCE — PRODUCT PAGE
+// =========================================================
+
+
+// =========================================================
+// GET PRODUCT
+// =========================================================
+
 const params =
-new URLSearchParams(window.location.search);
+    new URLSearchParams(
+        window.location.search
+    );
 
 
-const id = params.get("id");
+const productId =
+    params.get("id");
 
 
-const product =
-products.find(item => item.id == id);
+const currentProduct =
+    products.find(function (item) {
 
+        return String(item.id) ===
+            String(productId);
 
+    });
 
-const box =
-document.getElementById("product-details");
 
+const productBox =
+    document.getElementById(
+        "product-details"
+    );
 
 
-box.innerHTML = `
+// =========================================================
+// INVALID PRODUCT
+// =========================================================
 
+if (!currentProduct) {
 
-<div class="product-card">
+    if (productBox) {
 
+        productBox.innerHTML = `
 
-<div class="product-image">
+            <div class="empty-products">
 
-<img src="${product.image}">
+                <h2>
+                    Product Not Found
+                </h2>
 
-</div>
+                <p>
+                    The product you are looking for
+                    does not exist.
+                </p>
 
+                <a href="shop.html">
 
+                    <button>
+                        Continue Shopping
+                    </button>
 
-<div class="product-info">
+                </a>
 
+            </div>
 
-<h1>
-${product.name}
-</h1>
+        `;
 
-<h2 class="price">
+    }
 
-₹${product.price}
+}
 
-<span class="old-price">
 
-₹${product.oldPrice}
-
-</span>
-
-</h2>
-
-<div class="discount-badge">
-
--${product.discount}%
-
-</div>
-
-
-<div class="rating">
-
-⭐ ${product.rating} (${product.reviews} Reviews)
-
-</div>
-
-<p class="stock">
-
-${product.stock ? "✅ In Stock" : "❌ Out of Stock"}
-
-</p>
-
-<p class="delivery">
-
-🚚 ${product.delivery}
-
-</p>
-
-<p>
-${product.description}
-</p>
-
-
-
-<div class="quantity">
-
-<button onclick="decrease()">
--
-</button>
-
-
-<span id="qty">
-1
-</span>
-
-
-<button onclick="increase()">
-+
-</button>
-
-
-</div>
-
-
-
-<button onclick="addToCart()">
-
-Add To Cart
-
-</button>
-
-<button onclick="addToWishlist()">
-❤️ Add To Wishlist
-</button>
-
-
-<div class="features">
-
-<p>✓ Worldwide Shipping</p>
-
-<p>✓ Secure Payment</p>
-
-<p>✓ Easy Returns</p>
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-
-`;
-
-
+// =========================================================
+// QUANTITY
+// =========================================================
 
 let quantity = 1;
 
 
+function updateQuantityDisplay() {
 
-function increase(){
-
-quantity++;
-
-document.getElementById("qty").innerText=quantity;
-
-}
+    const quantityElement =
+        document.getElementById("qty");
 
 
+    if (quantityElement) {
 
-function decrease(){
+        quantityElement.innerText =
+            quantity;
 
-if(quantity>1){
-
-quantity--;
-
-document.getElementById("qty").innerText=quantity;
-
-}
+    }
 
 }
 
 
+function increase() {
+
+    if (!currentProduct) {
+        return;
+    }
 
 
-function addToCart(){
+    quantity++;
 
 
-let cart =
-JSON.parse(localStorage.getItem("cart"))
-|| [];
-
-
-
-for(let i=0;i<quantity;i++){
-
-cart.push(product);
+    updateQuantityDisplay();
 
 }
 
 
+function decrease() {
 
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
-);
-
-
-
-alert("Added to Cart 🛒");
-updateCartCount();
-
-}
-
-function addToWishlist(){
-
-let wishlist =
-JSON.parse(localStorage.getItem("wishlist"))
-|| [];
+    if (quantity <= 1) {
+        return;
+    }
 
 
-wishlist.push(product);
+    quantity--;
 
 
-localStorage.setItem(
-"wishlist",
-JSON.stringify(wishlist)
-);
-
-
-alert("Added to Wishlist ❤️");
-
-}
-
-function addReview(){
-
-let text =
-document.getElementById("reviewText").value;
-
-
-if(text===""){
-
-alert("Please write a review");
-
-return;
+    updateQuantityDisplay();
 
 }
 
 
-let reviews =
-JSON.parse(localStorage.getItem("reviews"))
-|| [];
+// =========================================================
+// DISPLAY PRODUCT
+// =========================================================
+
+if (
+    currentProduct &&
+    productBox
+) {
+
+    productBox.innerHTML = `
+
+        <div class="product-card">
 
 
-reviews.push({
+            <!-- PRODUCT IMAGE -->
 
-text:text,
+            <div class="product-image">
 
-date:new Date().toLocaleDateString()
+                <img
+                    src="${currentProduct.image}"
+                    alt="${currentProduct.name}"
+                >
 
-});
-
-
-localStorage.setItem(
-"reviews",
-JSON.stringify(reviews)
-);
+            </div>
 
 
-displayReviews();
+            <!-- PRODUCT INFORMATION -->
 
-const relatedBox = document.getElementById("related-products");
+            <div class="product-info">
 
-if (relatedBox) {
 
-    products
-        .filter(item => item.id != product.id)
-        .slice(0,3)
-        .forEach(item => {
+                <h1>
+                    ${currentProduct.name}
+                </h1>
 
-            relatedBox.innerHTML += productCard(item);
+
+                <h2 class="price">
+
+                    ₹${Number(
+                        currentProduct.price
+                    ).toLocaleString("en-IN")}
+
+                    <span class="old-price">
+
+                        ₹${Number(
+                            currentProduct.oldPrice
+                        ).toLocaleString("en-IN")}
+
+                    </span>
+
+                </h2>
+
+
+                <div class="discount-badge">
+
+                    -${currentProduct.discount || 0}%
+
+                </div>
+
+
+                <div class="rating">
+
+                    ⭐ ${currentProduct.rating}
+
+                    (${currentProduct.reviews}
+                    Reviews)
+
+                </div>
+
+
+                <p class="stock">
+
+                    ${
+                        currentProduct.stock
+                        ? "✅ In Stock"
+                        : "❌ Out of Stock"
+                    }
+
+                </p>
+
+
+                <p class="delivery">
+
+                    🚚 ${currentProduct.delivery}
+
+                </p>
+
+
+                <p>
+
+                    ${currentProduct.description}
+
+                </p>
+
+
+                <!-- QUANTITY -->
+
+                <div class="quantity">
+
+                    <button
+                        type="button"
+                        onclick="decrease()"
+                    >
+                        −
+                    </button>
+
+
+                    <span id="qty">
+                        1
+                    </span>
+
+
+                    <button
+                        type="button"
+                        onclick="increase()"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <!-- ADD TO CART -->
+
+                <button
+                    type="button"
+                    onclick="addProductToCart()"
+                    ${!currentProduct.stock
+                        ? "disabled"
+                        : ""}
+                >
+
+                    🛒 Add To Cart
+
+                </button>
+
+
+                <!-- WISHLIST -->
+
+                <button
+                    type="button"
+                    onclick="addProductToWishlist()"
+                >
+
+                    ❤️ Add To Wishlist
+
+                </button>
+
+
+                <!-- FEATURES -->
+
+                <div class="features">
+
+                    <p>
+                        ✓ Worldwide Shipping
+                    </p>
+
+                    <p>
+                        ✓ Secure Payment
+                    </p>
+
+                    <p>
+                        ✓ Easy Returns
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+// =========================================================
+// ADD PRODUCT TO CART
+// =========================================================
+
+function addProductToCart() {
+
+    if (!currentProduct) {
+        return;
+    }
+
+
+    if (!currentProduct.stock) {
+
+        if (
+            typeof showToast ===
+            "function"
+        ) {
+
+            showToast(
+                "This product is out of stock",
+                "❌"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    let cart = [];
+
+
+    try {
+
+        const savedCart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            );
+
+
+        if (Array.isArray(savedCart)) {
+
+            cart = savedCart;
+
+        }
+
+    } catch (error) {
+
+        cart = [];
+
+    }
+
+
+    for (
+        let i = 0;
+        i < quantity;
+        i++
+    ) {
+
+        cart.push(currentProduct);
+
+    }
+
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+    // Reset any old coupon
+
+    localStorage.removeItem(
+        "discountAmount"
+    );
+
+
+    if (
+        typeof updateCartCount ===
+        "function"
+    ) {
+
+        updateCartCount();
+
+    }
+
+
+    if (
+        typeof showToast ===
+        "function"
+    ) {
+
+        showToast(
+
+            quantity === 1
+
+                ? currentProduct.name +
+                  " added to cart"
+
+                : quantity +
+                  " × " +
+                  currentProduct.name +
+                  " added to cart",
+
+            "🛒"
+
+        );
+
+    }
+
+}
+
+
+// =========================================================
+// ADD PRODUCT TO WISHLIST
+// =========================================================
+
+function addProductToWishlist() {
+
+    if (!currentProduct) {
+        return;
+    }
+
+
+    let wishlist = [];
+
+
+    try {
+
+        const savedWishlist =
+            JSON.parse(
+                localStorage.getItem(
+                    "wishlist"
+                )
+            );
+
+
+        if (
+            Array.isArray(
+                savedWishlist
+            )
+        ) {
+
+            wishlist =
+                savedWishlist;
+
+        }
+
+    } catch (error) {
+
+        wishlist = [];
+
+    }
+
+
+    const alreadyExists =
+        wishlist.some(function (item) {
+
+            return String(item.id) ===
+                String(currentProduct.id);
 
         });
 
-}
 
-document.getElementById("reviewText").value="";
+    if (alreadyExists) {
 
+        if (
+            typeof showToast ===
+            "function"
+        ) {
 
-}
+            showToast(
+                "Already in your wishlist",
+                "❤️"
+            );
 
+        }
 
+        return;
 
-function displayReviews(){
-
-
-let list =
-document.getElementById("review-list");
-
-
-if(!list) return;
-
-
-let reviews =
-JSON.parse(localStorage.getItem("reviews"))
-|| [];
+    }
 
 
-list.innerHTML="";
+    wishlist.push(
+        currentProduct
+    );
 
 
-reviews.forEach(review=>{
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
 
 
-list.innerHTML += `
+    if (
+        typeof showToast ===
+        "function"
+    ) {
 
-<div class="review-card">
+        showToast(
+            currentProduct.name +
+            " added to wishlist",
+            "❤️"
+        );
 
-
-<div class="review-stars">
-
-★★★★★
-
-</div>
-
-
-<h4>
-Verified Customer
-</h4>
-
-
-<p>
-${review.text}
-</p>
-
-
-<div class="review-date">
-
-${review.date}
-
-</div>
-
-
-</div>
-
-`;
-
-});
-
+    }
 
 }
 
+
+// =========================================================
+// REVIEWS
+// =========================================================
+
+function getReviews() {
+
+    try {
+
+        const savedReviews =
+            JSON.parse(
+                localStorage.getItem(
+                    "reviews"
+                )
+            );
+
+
+        return Array.isArray(
+            savedReviews
+        )
+            ? savedReviews
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+// =========================================================
+// DISPLAY REVIEWS
+// =========================================================
+
+function displayReviews() {
+
+    const reviewList =
+        document.getElementById(
+            "review-list"
+        );
+
+
+    if (!reviewList) {
+        return;
+    }
+
+
+    const reviews =
+        getReviews();
+
+
+    reviewList.innerHTML = "";
+
+
+    if (reviews.length === 0) {
+
+        reviewList.innerHTML = `
+
+            <div class="empty-reviews">
+
+                <p>
+                    No reviews yet.
+                    Be the first to review
+                    this product!
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    reviews.forEach(
+        function (review) {
+
+            const reviewCard =
+                document.createElement(
+                    "div"
+                );
+
+
+            reviewCard.className =
+                "review-card";
+
+
+            const stars =
+                document.createElement(
+                    "div"
+                );
+
+            stars.className =
+                "review-stars";
+
+            stars.innerText =
+                "★★★★★";
+
+
+            const customer =
+                document.createElement(
+                    "h4"
+                );
+
+            customer.innerText =
+                "Verified Customer";
+
+
+            const reviewText =
+                document.createElement(
+                    "p"
+                );
+
+            reviewText.innerText =
+                review.text || "";
+
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+            date.className =
+                "review-date";
+
+            date.innerText =
+                review.date || "";
+
+
+            reviewCard.appendChild(
+                stars
+            );
+
+            reviewCard.appendChild(
+                customer
+            );
+
+            reviewCard.appendChild(
+                reviewText
+            );
+
+            reviewCard.appendChild(
+                date
+            );
+
+
+            reviewList.appendChild(
+                reviewCard
+            );
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// ADD REVIEW
+// =========================================================
+
+function addReview() {
+
+    const reviewInput =
+        document.getElementById(
+            "reviewText"
+        );
+
+
+    if (!reviewInput) {
+        return;
+    }
+
+
+    const text =
+        reviewInput.value.trim();
+
+
+    if (!text) {
+
+        if (
+            typeof showToast ===
+            "function"
+        ) {
+
+            showToast(
+                "Please write a review first",
+                "✍️"
+            );
+
+        }
+
+        else {
+
+            alert(
+                "Please write a review"
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    const reviews =
+        getReviews();
+
+
+    reviews.push({
+
+        text: text,
+
+        date:
+            new Date()
+                .toLocaleDateString(
+                    "en-IN"
+                )
+
+    });
+
+
+    localStorage.setItem(
+        "reviews",
+        JSON.stringify(reviews)
+    );
+
+
+    reviewInput.value = "";
+
+
+    displayReviews();
+
+
+    if (
+        typeof showToast ===
+        "function"
+    ) {
+
+        showToast(
+            "Your review has been added",
+            "⭐"
+        );
+
+    }
+
+}
+
+
+// =========================================================
+// RELATED PRODUCTS
+// =========================================================
+
+function displayRelatedProducts() {
+
+    const relatedBox =
+        document.getElementById(
+            "related-products"
+        );
+
+
+    if (
+        !relatedBox ||
+        !currentProduct
+    ) {
+
+        return;
+
+    }
+
+
+    relatedBox.innerHTML = "";
+
+
+    const relatedProducts =
+        products
+
+            .filter(function (item) {
+
+                return (
+                    String(item.id) !==
+                    String(currentProduct.id)
+                );
+
+            })
+
+            .slice(0, 3);
+
+
+    relatedProducts.forEach(
+        function (item) {
+
+            if (
+                typeof productCard ===
+                "function"
+            ) {
+
+                relatedBox.innerHTML +=
+                    productCard(item);
+
+            }
+
+        }
+    );
+
+}
+
+
+// =========================================================
+// INITIALIZE
+// =========================================================
 
 displayReviews();
+
+displayRelatedProducts();

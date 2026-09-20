@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Checkout - R&D Commerce</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <title>Checkout - R&D Commerce</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -18,208 +23,347 @@
 <body>
 
 
+<!-- ============================= -->
+<!-- HEADER -->
+<!-- ============================= -->
+
 <header>
 
-<div class="logo">
-R&D <span>COMMERCE</span>
-</div>
+    <div class="logo">
+
+        <a href="index.html">
+
+            <span class="logo-rd">
+                R&D
+            </span>
+
+            <span class="logo-commerce">
+                COMMERCE
+            </span>
+
+        </a>
+
+    </div>
 
 
-<nav>
+    <nav>
 
-<a href="index.html">
-Home
-</a>
+        <a href="index.html">
+            Home
+        </a>
 
-<a href="shop.html">
-Shop
-</a>
+        <a href="shop.html">
+            Shop
+        </a>
 
-<a href="cart.html">
-Cart
-</a>
+        <a href="about.html">
+            About
+        </a>
 
-</nav>
+        <a href="contact.html">
+            Contact
+        </a>
+
+        <a href="wishlist.html">
+            ❤️ Wishlist
+        </a>
+
+
+        <button
+            id="themeToggle"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+        >
+            🌙
+        </button>
+
+
+        <a
+            href="login.html"
+            id="userMenu"
+        >
+            Login
+        </a>
+
+
+        <a
+            href="cart.html"
+            class="cart-link"
+        >
+
+            🛒 Cart
+
+            <span id="cart-count">
+                0
+            </span>
+
+        </a>
+
+    </nav>
 
 </header>
 
 
 
+<!-- ============================= -->
+<!-- CHECKOUT -->
+<!-- ============================= -->
+
 <section class="products">
 
-<h1>
-Checkout
-</h1>
+    <h1>
+        Checkout
+    </h1>
 
 
-<div class="card">
+    <div class="card">
 
 
-<h2>
-Delivery Details
-</h2>
+        <!-- ========================= -->
+        <!-- DELIVERY DETAILS -->
+        <!-- ========================= -->
 
+        <h2>
+            Delivery Details
+        </h2>
 
-<input
-    type="text"
-    id="fullName"
-    placeholder="Full Name"
->
 
+        <input
+            type="text"
+            id="fullName"
+            placeholder="Full Name"
+            autocomplete="name"
+        >
 
-<br><br>
 
+        <br>
+        <br>
 
-<input
-    type="email"
-    id="email"
-    placeholder="Email"
->
 
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+            autocomplete="email"
+        >
 
-<br><br>
 
+        <br>
+        <br>
 
-<input
-    type="tel"
-    id="phone"
-    placeholder="Phone Number"
->
 
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Phone Number"
+            autocomplete="tel"
+        >
 
-<br><br>
 
+        <br>
+        <br>
 
-<textarea
-    id="address"
-    placeholder="Shipping Address"
-></textarea>
 
+        <textarea
+            id="address"
+            placeholder="Shipping Address"
+            autocomplete="street-address"
+        ></textarea>
 
 
-<h3>
-Payment Method
-</h3>
 
+        <!-- ========================= -->
+        <!-- PAYMENT -->
+        <!-- ========================= -->
 
-<label>
+        <h3>
+            Payment Method
+        </h3>
 
-<input
-    type="radio"
-    name="payment"
-    value="UPI"
->
 
-UPI
+        <label>
 
-</label>
+            <input
+                type="radio"
+                name="payment"
+                value="UPI"
+            >
 
+            UPI
 
-<br>
+        </label>
 
 
-<label>
+        <br>
 
-<input
-    type="radio"
-    name="payment"
-    value="Card"
->
 
-Card
+        <label>
 
-</label>
+            <input
+                type="radio"
+                name="payment"
+                value="Card"
+            >
 
+            Card
 
-<br>
+        </label>
 
 
-<label>
+        <br>
 
-<input
-    type="radio"
-    name="payment"
-    value="Cash On Delivery"
->
 
-Cash On Delivery
+        <label>
 
-</label>
+            <input
+                type="radio"
+                name="payment"
+                value="Cash On Delivery"
+            >
 
+            Cash On Delivery
 
+        </label>
 
-<br><br>
 
 
+        <br>
+        <br>
 
-<h3>
-Your Order
-</h3>
 
 
-<div id="checkout-items">
+        <!-- ========================= -->
+        <!-- ORDER -->
+        <!-- ========================= -->
 
-</div>
+        <h3>
+            Your Order
+        </h3>
 
 
+        <div id="checkout-items">
 
-<h3>
+        </div>
 
-Subtotal:
-₹<span id="checkout-subtotal">
-0
-</span>
 
-</h3>
 
+        <h3>
 
-<h3>
+            Subtotal:
+            ₹<span id="checkout-subtotal">
+                0
+            </span>
 
-Discount:
-₹<span id="checkout-discount">
-0
-</span>
+        </h3>
 
-</h3>
 
+        <h3>
 
-<h2>
+            Discount:
+            ₹<span id="checkout-discount">
+                0
+            </span>
 
-Total:
-₹<span id="checkout-total">
-0
-</span>
+        </h3>
 
-</h2>
 
+        <h2>
 
+            Total:
+            ₹<span id="checkout-total">
+                0
+            </span>
 
-<br>
+        </h2>
 
 
-<button onclick="placeOrder()">
 
-Place Order
+        <br>
 
-</button>
 
+        <button
+            type="button"
+            onclick="placeOrder()"
+        >
+            Place Order
+        </button>
 
-</div>
+
+    </div>
 
 </section>
 
 
 
+<!-- ============================= -->
+<!-- TOAST -->
+<!-- ============================= -->
+
+<div id="toast-container"></div>
+
+
+
+<!-- ============================= -->
+<!-- BACK TO TOP -->
+<!-- ============================= -->
+
+<button
+    id="backToTop"
+    aria-label="Back to top"
+>
+    ↑
+</button>
+
+
+
+<!-- ============================= -->
+<!-- SCRIPTS -->
+<!-- ============================= -->
+
+<script src="script.js"></script>
+
+
 <script>
 
-// ===============================
+// =========================================================
+// CHECKOUT SYSTEM
+// =========================================================
+
+
+// =========================================================
 // LOAD CART
-// ===============================
+// =========================================================
+
+function getCheckoutCart() {
+
+    try {
+
+        const savedCart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            );
+
+
+        return Array.isArray(savedCart)
+            ? savedCart
+            : [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
 
 let cart =
-    JSON.parse(localStorage.getItem("cart"))
-    || [];
+    getCheckoutCart();
 
+
+// =========================================================
+// ELEMENTS
+// =========================================================
 
 const checkoutItems =
     document.getElementById(
@@ -245,35 +389,68 @@ const checkoutTotal =
     );
 
 
+// =========================================================
+// DISPLAY CHECKOUT
+// =========================================================
 
-// ===============================
-// DISPLAY ORDER
-// ===============================
+function displayCheckout() {
 
-function displayCheckout(){
+    if (!checkoutItems) {
+        return;
+    }
 
-    if(cart.length === 0){
+
+    // =====================================================
+    // EMPTY CART
+    // =====================================================
+
+    if (cart.length === 0) {
 
         checkoutItems.innerHTML = `
-            <p>
-                Your cart is empty 🛒
-            </p>
 
-            <a href="shop.html">
-                <button>
-                    Continue Shopping
-                </button>
-            </a>
+            <div class="empty-cart">
+
+                <h2>
+                    Your cart is empty 🛒
+                </h2>
+
+                <p>
+                    Add products before
+                    proceeding to checkout.
+                </p>
+
+
+                <a href="shop.html">
+
+                    <button type="button">
+                        Continue Shopping
+                    </button>
+
+                </a>
+
+            </div>
+
         `;
 
-        checkoutSubtotal.innerText = "0";
-        checkoutDiscount.innerText = "0";
-        checkoutTotal.innerText = "0";
+
+        checkoutSubtotal.innerText =
+            "0";
+
+        checkoutDiscount.innerText =
+            "0";
+
+        checkoutTotal.innerText =
+            "0";
+
 
         return;
 
     }
 
+
+    // =====================================================
+    // CALCULATE SUBTOTAL
+    // =====================================================
 
     let subtotal = 0;
 
@@ -281,45 +458,50 @@ function displayCheckout(){
     checkoutItems.innerHTML = "";
 
 
-    cart.forEach(item => {
+    cart.forEach(
+        function (item) {
 
-        subtotal += Number(item.price);
+            const price =
+                Number(item.price) || 0;
 
 
-        checkoutItems.innerHTML += `
+            subtotal += price;
 
-            <div class="cart-card">
 
-                <img
-                    src="${item.image}"
-                    alt="${item.name}"
-                >
+            checkoutItems.innerHTML += `
 
-                <div>
+                <div class="cart-card">
 
-                    <h3>
-                        ${item.name}
-                    </h3>
+                    <img
+                        src="${item.image || ""}"
+                        alt="${item.name || "Product"}"
+                    >
 
-                    <p>
-                        ₹${item.price}
-                    </p>
+
+                    <div>
+
+                        <h3>
+                            ${item.name || "Product"}
+                        </h3>
+
+
+                        <p>
+                            ₹${price.toLocaleString("en-IN")}
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </div>
+            `;
 
-        `;
-
-    });
-
+        }
+    );
 
 
-    /*
-       Read discount from cart page.
-       If RISHU was used, the discount is
-       stored temporarily in localStorage.
-    */
+    // =====================================================
+    // DISCOUNT
+    // =====================================================
 
     const savedDiscount =
         Number(
@@ -331,10 +513,14 @@ function displayCheckout(){
 
     const discount =
         Math.min(
-            savedDiscount,
+            Math.max(0, savedDiscount),
             subtotal
         );
 
+
+    // =====================================================
+    // FINAL TOTAL
+    // =====================================================
 
     const finalTotal =
         Math.max(
@@ -344,30 +530,40 @@ function displayCheckout(){
 
 
     checkoutSubtotal.innerText =
-        subtotal.toLocaleString();
+        subtotal.toLocaleString(
+            "en-IN"
+        );
 
 
     checkoutDiscount.innerText =
-        discount.toLocaleString();
+        discount.toLocaleString(
+            "en-IN"
+        );
 
 
     checkoutTotal.innerText =
-        finalTotal.toLocaleString();
+        finalTotal.toLocaleString(
+            "en-IN"
+        );
 
 }
 
 
-
-// ===============================
+// =========================================================
 // PLACE ORDER
-// ===============================
+// =========================================================
 
-function placeOrder(){
+function placeOrder() {
 
-    if(cart.length === 0){
+    // -----------------------------------------------------
+    // CART CHECK
+    // -----------------------------------------------------
 
-        alert(
-            "Your cart is empty!"
+    if (cart.length === 0) {
+
+        showCheckoutMessage(
+            "Your cart is empty!",
+            "🛒"
         );
 
         return;
@@ -375,30 +571,36 @@ function placeOrder(){
     }
 
 
+    // -----------------------------------------------------
+    // GET DETAILS
+    // -----------------------------------------------------
 
     const name =
-        document.getElementById(
-            "fullName"
-        ).value.trim();
+        document
+            .getElementById("fullName")
+            .value
+            .trim();
 
 
     const email =
-        document.getElementById(
-            "email"
-        ).value.trim();
+        document
+            .getElementById("email")
+            .value
+            .trim();
 
 
     const phone =
-        document.getElementById(
-            "phone"
-        ).value.trim();
+        document
+            .getElementById("phone")
+            .value
+            .trim();
 
 
     const address =
-        document.getElementById(
-            "address"
-        ).value.trim();
-
+        document
+            .getElementById("address")
+            .value
+            .trim();
 
 
     const payment =
@@ -407,11 +609,15 @@ function placeOrder(){
         );
 
 
+    // -----------------------------------------------------
+    // VALIDATION
+    // -----------------------------------------------------
 
-    if(!name){
+    if (!name) {
 
-        alert(
-            "Please enter your full name."
+        showCheckoutMessage(
+            "Please enter your full name.",
+            "⚠️"
         );
 
         return;
@@ -419,10 +625,11 @@ function placeOrder(){
     }
 
 
-    if(!email){
+    if (!email) {
 
-        alert(
-            "Please enter your email."
+        showCheckoutMessage(
+            "Please enter your email.",
+            "⚠️"
         );
 
         return;
@@ -430,10 +637,11 @@ function placeOrder(){
     }
 
 
-    if(!phone){
+    if (!email.includes("@")) {
 
-        alert(
-            "Please enter your phone number."
+        showCheckoutMessage(
+            "Please enter a valid email address.",
+            "⚠️"
         );
 
         return;
@@ -441,10 +649,11 @@ function placeOrder(){
     }
 
 
-    if(!address){
+    if (!phone) {
 
-        alert(
-            "Please enter your shipping address."
+        showCheckoutMessage(
+            "Please enter your phone number.",
+            "⚠️"
         );
 
         return;
@@ -452,10 +661,11 @@ function placeOrder(){
     }
 
 
-    if(!payment){
+    if (!address) {
 
-        alert(
-            "Please select a payment method."
+        showCheckoutMessage(
+            "Please enter your shipping address.",
+            "⚠️"
         );
 
         return;
@@ -463,19 +673,33 @@ function placeOrder(){
     }
 
 
+    if (!payment) {
 
-    // ===============================
+        showCheckoutMessage(
+            "Please select a payment method.",
+            "⚠️"
+        );
+
+        return;
+
+    }
+
+
+    // -----------------------------------------------------
     // CALCULATE TOTAL
-    // ===============================
+    // -----------------------------------------------------
 
     let subtotal = 0;
 
 
-    cart.forEach(item => {
+    cart.forEach(
+        function (item) {
 
-        subtotal += Number(item.price);
+            subtotal +=
+                Number(item.price) || 0;
 
-    });
+        }
+    );
 
 
     const savedDiscount =
@@ -488,7 +712,7 @@ function placeOrder(){
 
     const discount =
         Math.min(
-            savedDiscount,
+            Math.max(0, savedDiscount),
             subtotal
         );
 
@@ -500,10 +724,9 @@ function placeOrder(){
         );
 
 
-
-    // ===============================
+    // -----------------------------------------------------
     // GENERATE ORDER ID
-    // ===============================
+    // -----------------------------------------------------
 
     const orderId =
         "RD" +
@@ -512,10 +735,9 @@ function placeOrder(){
             .slice(-8);
 
 
-
-    // ===============================
+    // -----------------------------------------------------
     // CREATE ORDER
-    // ===============================
+    // -----------------------------------------------------
 
     const order = {
 
@@ -545,7 +767,10 @@ function placeOrder(){
         total: finalTotal,
 
         date:
-            new Date().toLocaleString(),
+            new Date()
+                .toLocaleString(
+                    "en-IN"
+                ),
 
         status:
             "Order Placed"
@@ -553,18 +778,44 @@ function placeOrder(){
     };
 
 
+    // -----------------------------------------------------
+    // LOAD OLD ORDERS
+    // -----------------------------------------------------
 
-    // ===============================
-    // SAVE ORDER
-    // ===============================
+    let orders = [];
 
-    let orders =
-        JSON.parse(
-            localStorage.getItem(
-                "orders"
+
+    try {
+
+        const savedOrders =
+            JSON.parse(
+                localStorage.getItem(
+                    "orders"
+                )
+            );
+
+
+        if (
+            Array.isArray(
+                savedOrders
             )
-        ) || [];
+        ) {
 
+            orders =
+                savedOrders;
+
+        }
+
+    } catch (error) {
+
+        orders = [];
+
+    }
+
+
+    // -----------------------------------------------------
+    // SAVE ORDER
+    // -----------------------------------------------------
 
     orders.push(order);
 
@@ -575,10 +826,9 @@ function placeOrder(){
     );
 
 
-
-    // ===============================
+    // -----------------------------------------------------
     // SAVE LAST ORDER
-    // ===============================
+    // -----------------------------------------------------
 
     localStorage.setItem(
         "lastOrder",
@@ -586,10 +836,9 @@ function placeOrder(){
     );
 
 
-
-    // ===============================
+    // -----------------------------------------------------
     // CLEAR CART
-    // ===============================
+    // -----------------------------------------------------
 
     localStorage.removeItem(
         "cart"
@@ -601,10 +850,9 @@ function placeOrder(){
     );
 
 
-
-    // ===============================
+    // -----------------------------------------------------
     // GO TO SUCCESS PAGE
-    // ===============================
+    // -----------------------------------------------------
 
     window.location.href =
         "order-success.html";
@@ -612,10 +860,43 @@ function placeOrder(){
 }
 
 
+// =========================================================
+// CHECKOUT MESSAGE
+// =========================================================
 
-// ===============================
-// START
-// ===============================
+function showCheckoutMessage(
+    message,
+    icon
+) {
+
+    if (
+        typeof showToast ===
+        "function"
+    ) {
+
+        showToast(
+            message,
+            icon
+        );
+
+    }
+
+    else {
+
+        alert(
+            icon +
+            " " +
+            message
+        );
+
+    }
+
+}
+
+
+// =========================================================
+// INITIALIZE
+// =========================================================
 
 displayCheckout();
 

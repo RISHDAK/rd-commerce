@@ -248,28 +248,25 @@ if (
                 <!-- ADD TO CART -->
 
                 <button
-                    type="button"
-                    onclick="addProductToCart()"
-                    ${!currentProduct.stock
-                        ? "disabled"
-                        : ""}
-                >
-
-                    🛒 Add To Cart
-
-                </button>
-
+    type="button"
+    class="product-action-btn add-cart-btn"
+    onclick="addProductToCart()"
+    ${!currentProduct.stock ? "disabled" : ""}
+>
+    <span class="btn-icon">🛒</span>
+    <span>Add To Cart</span>
+</button>
 
                 <!-- WISHLIST -->
 
                 <button
-                    type="button"
-                    onclick="addProductToWishlist()"
-                >
-
-                    ❤️ Add To Wishlist
-
-                </button>
+    type="button"
+    class="product-action-btn wishlist-action-btn"
+    onclick="addProductToWishlist()"
+>
+    <span class="btn-icon">❤️</span>
+    <span>Add To Wishlist</span>
+</button>
 
 
                 <!-- FEATURES -->

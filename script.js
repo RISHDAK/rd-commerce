@@ -152,13 +152,14 @@ function productCard(product) {
             </p>
 
 
-            <a href="product.html?id=${product.id}">
-
-                <button>
-                    View Product
-                </button>
-
-            </a>
+          <a
+    href="product.html?id=${product.id}"
+    class="view-product-btn"
+>
+    <span class="btn-icon">👁️</span>
+    <span>View Product</span>
+    <span class="btn-arrow">→</span>
+</a>
 
 
             <button

@@ -129,20 +129,35 @@ padding:30px;
 }
 
 
-@media(max-width:768px){
+@media (max-width: 768px) {
 
-nav{
-display:none;
+    nav {
+        display: none;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .category-box {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
 }
 
-.product-grid,
-.category-box{
-grid-template-columns:1fr;
-}
+@media (max-width: 480px) {
 
-.hero h1{
-font-size:32px;
-}
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-box {
+        grid-template-columns: 1fr;
+    }
 
 }
 

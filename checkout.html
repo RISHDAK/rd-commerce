@@ -2,12 +2,21 @@
 <html>
 
 <head>
+
 <title>Checkout - R&D Commerce</title>
+
 <link rel="stylesheet" href="style.css">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
 </head>
 
 
 <body>
+
 
 <header>
 
@@ -15,81 +24,187 @@
 R&D <span>COMMERCE</span>
 </div>
 
+
 <nav>
-<a href="index.html">Home</a>
-<a href="cart.html">Cart</a>
+
+<a href="index.html">
+Home
+</a>
+
+<a href="shop.html">
+Shop
+</a>
+
+<a href="cart.html">
+Cart
+</a>
+
 </nav>
 
 </header>
 
 
+
 <section class="products">
 
-<h1>Checkout</h1>
+<h1>
+Checkout
+</h1>
 
 
 <div class="card">
 
 
-<input placeholder="Full Name">
+<h2>
+Delivery Details
+</h2>
+
+
+<input
+    type="text"
+    id="fullName"
+    placeholder="Full Name"
+>
+
 
 <br><br>
 
-<input placeholder="Email">
+
+<input
+    type="email"
+    id="email"
+    placeholder="Email"
+>
+
 
 <br><br>
 
-<input placeholder="Phone Number">
+
+<input
+    type="tel"
+    id="phone"
+    placeholder="Phone Number"
+>
+
 
 <br><br>
 
-<textarea placeholder="Shipping Address"></textarea>
+
+<textarea
+    id="address"
+    placeholder="Shipping Address"
+></textarea>
 
 
-<h3>Payment Method</h3>
+
+<h3>
+Payment Method
+</h3>
 
 
 <label>
-<input type="radio" name="payment">
+
+<input
+    type="radio"
+    name="payment"
+    value="UPI"
+>
+
 UPI
+
 </label>
+
 
 <br>
 
+
 <label>
-<input type="radio" name="payment">
+
+<input
+    type="radio"
+    name="payment"
+    value="Card"
+>
+
 Card
+
 </label>
+
 
 <br>
 
+
 <label>
-<input type="radio" name="payment">
+
+<input
+    type="radio"
+    name="payment"
+    value="Cash On Delivery"
+>
+
 Cash On Delivery
+
 </label>
+
 
 
 <br><br>
 
-<h3>Your Order</h3>
 
-<div id="checkout-items"></div>
+
+<h3>
+Your Order
+</h3>
+
+
+<div id="checkout-items">
+
+</div>
+
+
+
+<h3>
+
+Subtotal:
+₹<span id="checkout-subtotal">
+0
+</span>
+
+</h3>
+
+
+<h3>
+
+Discount:
+₹<span id="checkout-discount">
+0
+</span>
+
+</h3>
+
 
 <h2>
 
-Total : ₹<span id="checkout-total">0</span>
+Total:
+₹<span id="checkout-total">
+0
+</span>
 
 </h2>
 
+
+
 <br>
 
+
 <button onclick="placeOrder()">
+
 Place Order
+
 </button>
 
 
 </div>
-
 
 </section>
 
@@ -97,11 +212,412 @@ Place Order
 
 <script>
 
-function placeOrder(){
+// ===============================
+// LOAD CART
+// ===============================
 
-window.location.href="order-success.html";
+let cart =
+    JSON.parse(localStorage.getItem("cart"))
+    || [];
+
+
+const checkoutItems =
+    document.getElementById(
+        "checkout-items"
+    );
+
+
+const checkoutSubtotal =
+    document.getElementById(
+        "checkout-subtotal"
+    );
+
+
+const checkoutDiscount =
+    document.getElementById(
+        "checkout-discount"
+    );
+
+
+const checkoutTotal =
+    document.getElementById(
+        "checkout-total"
+    );
+
+
+
+// ===============================
+// DISPLAY ORDER
+// ===============================
+
+function displayCheckout(){
+
+    if(cart.length === 0){
+
+        checkoutItems.innerHTML = `
+            <p>
+                Your cart is empty 🛒
+            </p>
+
+            <a href="shop.html">
+                <button>
+                    Continue Shopping
+                </button>
+            </a>
+        `;
+
+        checkoutSubtotal.innerText = "0";
+        checkoutDiscount.innerText = "0";
+        checkoutTotal.innerText = "0";
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+
+    checkoutItems.innerHTML = "";
+
+
+    cart.forEach(item => {
+
+        subtotal += Number(item.price);
+
+
+        checkoutItems.innerHTML += `
+
+            <div class="cart-card">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}"
+                >
+
+                <div>
+
+                    <h3>
+                        ${item.name}
+                    </h3>
+
+                    <p>
+                        ₹${item.price}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+
+    /*
+       Read discount from cart page.
+       If RISHU was used, the discount is
+       stored temporarily in localStorage.
+    */
+
+    const savedDiscount =
+        Number(
+            localStorage.getItem(
+                "discountAmount"
+            )
+        ) || 0;
+
+
+    const discount =
+        Math.min(
+            savedDiscount,
+            subtotal
+        );
+
+
+    const finalTotal =
+        Math.max(
+            0,
+            subtotal - discount
+        );
+
+
+    checkoutSubtotal.innerText =
+        subtotal.toLocaleString();
+
+
+    checkoutDiscount.innerText =
+        discount.toLocaleString();
+
+
+    checkoutTotal.innerText =
+        finalTotal.toLocaleString();
 
 }
+
+
+
+// ===============================
+// PLACE ORDER
+// ===============================
+
+function placeOrder(){
+
+    if(cart.length === 0){
+
+        alert(
+            "Your cart is empty!"
+        );
+
+        return;
+
+    }
+
+
+
+    const name =
+        document.getElementById(
+            "fullName"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim();
+
+
+    const address =
+        document.getElementById(
+            "address"
+        ).value.trim();
+
+
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+
+    if(!name){
+
+        alert(
+            "Please enter your full name."
+        );
+
+        return;
+
+    }
+
+
+    if(!email){
+
+        alert(
+            "Please enter your email."
+        );
+
+        return;
+
+    }
+
+
+    if(!phone){
+
+        alert(
+            "Please enter your phone number."
+        );
+
+        return;
+
+    }
+
+
+    if(!address){
+
+        alert(
+            "Please enter your shipping address."
+        );
+
+        return;
+
+    }
+
+
+    if(!payment){
+
+        alert(
+            "Please select a payment method."
+        );
+
+        return;
+
+    }
+
+
+
+    // ===============================
+    // CALCULATE TOTAL
+    // ===============================
+
+    let subtotal = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal += Number(item.price);
+
+    });
+
+
+    const savedDiscount =
+        Number(
+            localStorage.getItem(
+                "discountAmount"
+            )
+        ) || 0;
+
+
+    const discount =
+        Math.min(
+            savedDiscount,
+            subtotal
+        );
+
+
+    const finalTotal =
+        Math.max(
+            0,
+            subtotal - discount
+        );
+
+
+
+    // ===============================
+    // GENERATE ORDER ID
+    // ===============================
+
+    const orderId =
+        "RD" +
+        Date.now()
+            .toString()
+            .slice(-8);
+
+
+
+    // ===============================
+    // CREATE ORDER
+    // ===============================
+
+    const order = {
+
+        orderId: orderId,
+
+        customer: {
+
+            name: name,
+
+            email: email,
+
+            phone: phone,
+
+            address: address
+
+        },
+
+        paymentMethod:
+            payment.value,
+
+        items: cart,
+
+        subtotal: subtotal,
+
+        discount: discount,
+
+        total: finalTotal,
+
+        date:
+            new Date().toLocaleString(),
+
+        status:
+            "Order Placed"
+
+    };
+
+
+
+    // ===============================
+    // SAVE ORDER
+    // ===============================
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem(
+                "orders"
+            )
+        ) || [];
+
+
+    orders.push(order);
+
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+
+
+    // ===============================
+    // SAVE LAST ORDER
+    // ===============================
+
+    localStorage.setItem(
+        "lastOrder",
+        JSON.stringify(order)
+    );
+
+
+
+    // ===============================
+    // CLEAR CART
+    // ===============================
+
+    localStorage.removeItem(
+        "cart"
+    );
+
+
+    localStorage.removeItem(
+        "discountAmount"
+    );
+
+
+
+    // ===============================
+    // GO TO SUCCESS PAGE
+    // ===============================
+
+    window.location.href =
+        "order-success.html";
+
+}
+
+
+
+// ===============================
+// START
+// ===============================
+
+displayCheckout();
 
 </script>
 

@@ -219,11 +219,42 @@ count.innerText = cart.length;
 
 updateCartCount();
 
-function toggleWishlist(id,event){
+function toggleWishlist(id, event){
 
-    event.stopPropagation();
+    if(event){
+        event.stopPropagation();
+    }
 
-    alert("Wishlist feature is coming in the next update ❤️");
+    const product = products.find(p => p.id === id);
+
+    if(!product){
+        return;
+    }
+
+    let wishlist =
+        JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    const alreadyAdded =
+        wishlist.some(item => item.id === id);
+
+    if(alreadyAdded){
+
+        showToast("Already in your wishlist", "❤️");
+        return;
+
+    }
+
+    wishlist.push(product);
+
+    localStorage.setItem(
+        "wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    showToast(
+        product.name + " added to wishlist",
+        "❤️"
+    );
 
 }
 
@@ -235,15 +266,32 @@ function addToCart(id){
         return;
     }
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if(!product.stock){
+
+        showToast(
+            product.name + " is currently out of stock",
+            "❌"
+        );
+
+        return;
+    }
+
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
 
     cart.push(product);
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
 
     updateCartCount();
 
-    alert(product.name + " added to cart 🛒");
+    showToast(
+        product.name + " added to cart",
+        "🛒"
+    );
 
 }
 
